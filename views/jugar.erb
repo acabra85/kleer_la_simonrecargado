@@ -1,0 +1,51 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">	
+	
+	$( document ).ready(function() {
+
+		setTimeout(function() {
+	
+    		$('#secuencia').fadeOut('slow');
+    		$('#respuesta').fadeIn('slow');
+		}, 5000);
+	});
+
+	function validar(imagen) {
+		if( imagen === "estrella") {
+			location.href = "/gano"
+		} else {
+			location.href = "/perdio"			
+		}
+	}
+
+</script>
+<style type="text/css">
+	.imagenSeq {
+    height: 100px;
+    width: 100px;
+	}
+</style>
+<div id="secuencia" style="display:block">
+	<h2>Simón Recargado dice:<h2>
+	<img class="imagenSeq" src="http://png-4.findicons.com/files/icons/1018/pixelicious/32/star.png" />
+</div>
+
+<div id="respuesta" style="display:none">
+	<table>
+		<tr colspan="2">
+			<h2>Selecciona las imagenes de tu respuesta . . .<h2>	
+			<input type="text" name="res" id="res" style="display:none">
+		</tr>
+		<tr>
+			<td><input type="image" class="imagenSeq" src="http://doc.qt.digia.com/4.6/images/used-in-examples/widgets/tooltips/images/square.png" id="but1" onclick="validar('cuadro')">
+				</input></td>
+			<td><input type="image" class="imagenSeq"id="but2" onclick="validar('estrella')" src="http://png-4.findicons.com/files/icons/1018/pixelicious/32/star.png" ></input></td>
+			<td><input type="image" class="imagenSeq"id="but3" onclick="validar('triangulo')" src="http://img3.wikia.nocookie.net/__cb20121214140518/uncyclopedia/images/8/88/Triangle%28shape%29.jpg" ></input></td>
+			<td><input type="image" class="imagenSeq"id="but4" onclick="validar('circulo')" src="http://www.arquba.com/curso-sketchup-gratis/entidades-de-circulo/index_ren-Circle.jpg" ></input></td>
+		<tr>
+	</table>
+</div>
+
+<form method="get" action="/">
+<input type="submit" name="Volver" value="volver" />
+</form>	
