@@ -102,3 +102,9 @@ D, [2014-12-05T08:21:30.129067 #7087] DEBUG -- : REQUESTING PAGE: GET / with {} 
 D, [2014-12-05T08:21:30.141062 #7087] DEBUG -- : REQUESTING PAGE: GET /jugar with {"jugar"=>"Jugar"} and HTTP headers {"HTTP_REFERER"=>"/"}
 D, [2014-12-05T08:21:30.147760 #7087] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
 D, [2014-12-05T08:21:30.155506 #7087] DEBUG -- : REQUESTING PAGE: GET /jugar with {"jugar"=>"Jugar"} and HTTP headers {"HTTP_REFERER"=>"/"}
+D, [2014-12-05T11:57:26.357244 #8447] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
+D, [2014-12-05T11:57:26.425927 #8447] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
+D, [2014-12-05T11:57:26.431225 #8447] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
+D, [2014-12-05T11:57:26.435429 #8447] DEBUG -- : REQUESTING PAGE: GET /jugar with {"jugar"=>"Jugar", "num"=>"1"} and HTTP headers {"HTTP_REFERER"=>"/"}
+D, [2014-12-05T11:57:26.444288 #8447] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
+D, [2014-12-05T11:57:26.455880 #8447] DEBUG -- : REQUESTING PAGE: GET /jugar with {"jugar"=>"Jugar", "num"=>"1"} and HTTP headers {"HTTP_REFERER"=>"/"}
