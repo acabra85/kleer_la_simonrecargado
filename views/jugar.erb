@@ -1,21 +1,45 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">	
 	
-	$( document ).ready(function() {
+	var arreglo = {
+		'circulo': 'http://www.arquba.com/curso-sketchup-gratis/entidades-de-circulo/index_ren-Circle.jpg',
+		'cuadrado': 'http://doc.qt.digia.com/4.6/images/used-in-examples/widgets/tooltips/images/square.png',
+		'estrella': 'http://img2.wikia.nocookie.net/__cb20130620210048/inciclopedia/images/1/18/Estrella_amarilla.png',
+		'triangulo': 'http://img3.wikia.nocookie.net/__cb20121214140518/uncyclopedia/images/8/88/Triangle%28shape%29.jpg'
+	};
 
+	$( document ).ready(function() {
 		setTimeout(function() {
-	
-    		$('#secuencia').fadeOut('fast');
+    		$('#secuencia').fadeOut('slow');
     		$('#respuesta').fadeIn('slow');
-		}, 5000);
+		}, 1000);
 	});
 
-	function validar(imagen) {
-		if( imagen === "estrella") {
+	function agregar(imagen) {
+		var innerHTML = document.getElementById('secuenciaRespuesta').innerHTML;
+		innerHTML = innerHTML + "<img class='imagenSeq' src='" + arreglo[imagen] + "' />";
+		document.getElementById('secuenciaRespuesta').innerHTML	= innerHTML;
+		var campoRespuesta = document.getElementById('campoRespuesta');
+		if(campoRespuesta.value.length == 0)
+			campoRespuesta.value = '["' + imagen + '"]';
+		else
+			campoRespuesta.value = campoRespuesta.value + ',' + '["' + imagen + '"]';;
+		validar();
+	}
+
+	function validar() {
+		var divSeq = document.getElementById("campoRespuesta");
+		var divSeqRes = document.getElementById("campoOriginal");
+		/*if(divSeq === divSeqRes) {
 			location.href = "/gano"
-		} else {
-			location.href = "/perdio"			
-		}
+		}else {
+			location.href = "/perdio"
+		}*/
+	
+	}
+	
+	function getUrlImagen(imagen) {
+		return mapImages[imagen];
 	}
 
 </script>
@@ -46,7 +70,10 @@ table tr {
 <div id="secuencia" style="display:block">
 	<h1>Simón Recargado dice:</h1>
 	<h2>Recuerda las imagenes, tienes 5 segundos......</h2>
-	<img class="imagenSeq" src="http://img2.wikia.nocookie.net/__cb20130620210048/inciclopedia/images/1/18/Estrella_amarilla.png" />
+		<%= @secuencia.split("&&")[0] %>	
+</div>
+
+<div id="secuenciaRespuesta" style="display:block; height: 20%;">
 </div>
 
 <div id="respuesta" style="display:none">
@@ -56,20 +83,26 @@ table tr {
 			<input type="text" name="res" id="res" style="display:none">
 		</tr>
 		<tr>
-			<td><input type="image" class="imagenSeq" src="http://doc.qt.digia.com/4.6/images/used-in-examples/widgets/tooltips/images/square.png" id="but1" onclick="validar('cuadro')">
-				</input></td>
-			<td><input type="image" class="imagenSeq"id="but2" onclick="validar('estrella')" src="http://png-4.findicons.com/files/icons/1018/pixelicious/32/star.png" ></input></td>
-			<td><input type="image" class="imagenSeq"id="but3" onclick="validar('triangulo')" src="http://img3.wikia.nocookie.net/__cb20121214140518/uncyclopedia/images/8/88/Triangle%28shape%29.jpg" ></input></td>
-			<td><input type="image" class="imagenSeq"id="but4" onclick="validar('circulo')" src="http://www.arquba.com/curso-sketchup-gratis/entidades-de-circulo/index_ren-Circle.jpg" ></input></td>
+			<td><input type="image" class="imagenSeq" src="http://doc.qt.digia.com/4.6/images/used-in-examples/widgets/tooltips/images/square.png" id="but1" onclick="agregar('cuadrado')" /></td>
+			<td><input type="image" class="imagenSeq" id="but2" onclick="agregar('estrella')" src="http://img2.wikia.nocookie.net/__cb20130620210048/inciclopedia/images/1/18/Estrella_amarilla.png" /></td>
+			<td><input type="image" class="imagenSeq" id="but3" onclick="agregar('triangulo')" src="http://img3.wikia.nocookie.net/__cb20121214140518/uncyclopedia/images/8/88/Triangle%28shape%29.jpg" /></td>
+			<td><input type="image" class="imagenSeq" id="but4" onclick="agregar('circulo')" src="http://www.arquba.com/curso-sketchup-gratis/entidades-de-circulo/index_ren-Circle.jpg" /></td>
 		<tr>
 	</table>
 <br/>
 <br/>
 <br/>
 
+
 <form method="get" action="/">
 <input type="submit" name="Reiniciar Juego" value="Reiniciar Juego" />
 </form>	
 </div>
 
+
+
+<div style="display:block;">
+	<input type="text" id = "campoRespuesta" value="" />
+	<input type="text" id = "campoOriginal" value=<%= @secuencia.split("&&")[1].split(',') %> />
+</div>
 
