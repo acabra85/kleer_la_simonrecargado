@@ -1,7 +1,7 @@
 class SimonRecargado
 
 
-	attr_accessor :lista_generada
+	#attr_accessor :lista_generada
 	
 	def initialize
 		@imagenes = ["estrella","triangulo","cuadrado", "circulo", "kleer"]
@@ -27,8 +27,6 @@ class SimonRecargado
 	end
 
 	def validarLista(listaRespuesta)
-		puts @lista_generada
-		puts listaRespuesta
 		@lista_generada == listaRespuesta
 	end
 end

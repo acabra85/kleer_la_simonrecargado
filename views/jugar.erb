@@ -50,7 +50,8 @@
 
 	$( document ).ready(function() {
 		setTimeout(function() {
-    		$('#secuencia').fadeOut('fast');
+    		$('#secuencia').fadeOut('slow');
+    		$('#secuencia').html("");
     		$('#respuesta').fadeIn('slow');
 		}, 1000*(parseInt(document.getElementById('num').value)+1));
 	});
@@ -69,9 +70,8 @@
 
 	function validar() {
 		var divSeq = document.getElementById("campoRespuesta").value;
-		var divSeqRes = document.getElementById("campoOriginal").value;
 		
-		if(divSeq.split(',').length === divSeqRes.split(',').length) {
+		if(divSeq.split(',').length === document.getElementById('num').value - 1) {
 			document.getElementById('botonSiguiente').click();
 		}	
 	}
@@ -148,7 +148,6 @@ table tr {
 <div style="display:none;">
 	<form method="get" action="/validar" name="formSiguiente">
 		<input type="text" id = "campoRespuesta" name = "campoRespuesta" value="" />
-		<input type="text" id = "campoOriginal" name = "campoOriginal" value=<%= @secuencia %> />
 		<input type="text" value=<%= @secuencia.split(',').length + 1 %> name="num" id="num">
 		<input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>
 	</form>

@@ -11,7 +11,7 @@ get '/' do
 end
 
 get '/jugar/?:num?' do
-	@@simon = SimonRecargado.new	
+	#@@simon = SimonRecargado.new	
 	@secuencia = @@simon.generarLista(params[:num])
 
 	erb :jugar
@@ -21,8 +21,8 @@ get '/perdio' do
 	erb :perdio
 end
 
-get '/validar/?:num?/?:campoRespuesta?/?:campoOriginal?' do
-	@@simon.lista_generada = params[:campoOriginal]
+get '/validar/?:num?/?:campoRespuesta?' do
+	#@@simon.lista_generada = params[:campoOriginal]
 	res = @@simon.validarLista(params[:campoRespuesta])
 	if(res)
 		@secuencia = @@simon.generarLista(params[:num])
