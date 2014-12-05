@@ -12,7 +12,7 @@
 		setTimeout(function() {
     		$('#secuencia').fadeOut('fast');
     		$('#respuesta').fadeIn('slow');
-		}, 3000);
+		}, 1000*(parseInt(document.getElementById('num').value)+1));
 	});
 
 	function agregar(imagen) {
@@ -71,7 +71,7 @@ table tr {
 </style>
 <div id="secuencia" style="display:block">
 	<h1>Simón Recargado dice:</h1>
-	<h2>Recuerda las imagenes, tienes 3 segundos......</h2>
+	<h2>Recuerda las imagenes, tienes <%= @secuencia.split("&&")[1].split(',').length + 2 %> segundos......</h2>
 		<%= @secuencia.split("&&")[0] %>	
 </div>
 
@@ -109,7 +109,7 @@ table tr {
 		<input type="text" id = "campoRespuesta" value="" />
 		<input type="text" id = "campoOriginal" value=<%= @secuencia.split("&&")[1] %> />
 		<input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>
-		<input type="text" value=<%= @secuencia.split("&&")[1].split(',').length + 1 %> name="num">
+		<input type="text" value=<%= @secuencia.split("&&")[1].split(',').length + 1 %> name="num" id="num">
 	</form>
 </div>
 
