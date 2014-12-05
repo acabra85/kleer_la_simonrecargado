@@ -10,6 +10,8 @@ Given(/^doy click en el boton "(.*?)"$/) do |name|
    click_button(name)
 end
 
-Then(/^debo ver la imagen "(.*?)"$/) do |image_name|
-  last_response.should have_xpath("//img[@src=\"#{image_name}\"]")
+Then(/^debo ver una imagen$/) do
+  last_response.should have_xpath("//img", :count => 1)
 end
+
+

@@ -6,7 +6,7 @@ Para ingresar al juego
 
 Scenario: Bienvenido
 	Given entro a la aplicacion
-	Then debo ver "Bienvenido! Soy Simón Recargado!!"
+	Then debo ver "Bienvenido!<br/> Soy Simón Recargado!!"
 
 Scenario: Boton ingreso
 	Given entro a la aplicacion	
