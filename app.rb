@@ -28,6 +28,7 @@ get '/validar/?:num?/?:campoRespuesta?' do
 		@secuencia = @@simon.generarLista(params[:num])
 		erb :jugar
 	else
+		@lista = @@simon.lista_respuesta
 		erb :perdio
 	end
 end

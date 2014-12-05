@@ -6,6 +6,7 @@
 
 
 		attr_accessor :imagenes
+		attr_accessor :tipos
 
 		def initialize
 			@imagenes = [
@@ -14,6 +15,8 @@
 				"http://www.semokwan.com/heraldica%20de%20hamgumdo/piramide.png",
 				"http://img2.wikia.nocookie.net/__cb20130620210048/inciclopedia/images/1/18/Estrella_amarilla.png",
 				"https://members.scrumalliance.org/system/user/photo/0008/9921/200x200/BigBigK-FondoBlanco.jpg"]
+
+			@tipos = ["circulo", "cuadrado", "triangulo", "estrella", "kleer"]
 		end
 		
 
@@ -32,7 +35,17 @@
 			end
 			"<img class='imagenSeq' src='" + img + "' />"
 		end
-	end	
+
+		def getNombreBoton(num)
+			"but"+num.to_s
+		end
+		
+		def getFuncion(name)
+			res = "agregar('" + name + "')"
+			puts res
+			res
+		end
+	end
 
 	@vista = Vista.new
 %>
@@ -43,8 +56,8 @@
 	var arreglo = {
 		'circulo': '<%= @vista.imagenes[0] %>',
 		'cuadrado': '<%= @vista.imagenes[1] %>',
-		'estrella': '<%= @vista.imagenes[3] %>',
 		'triangulo': '<%= @vista.imagenes[2] %>',
+		'estrella': '<%= @vista.imagenes[3] %>',
 		'kleer': '<%= @vista.imagenes[4] %>'
 	};
 
@@ -124,11 +137,13 @@ table tr {
 			<input type="text" name="res" id="res" style="display:none">
 		</tr>
 		<tr>
-			<td><input type="image" class="imagenSeq" id="but4" onclick="agregar('circulo')" src="<%= @vista.imagenes[0] %>" /></td>
-			<td><input type="image" class="imagenSeq" id="but1" onclick="agregar('cuadrado')" src="<%= @vista.imagenes[1] %>" /></td>
-			<td><input type="image" class="imagenSeq" id="but3" onclick="agregar('triangulo')" src="<%= @vista.imagenes[2] %>" /></td>
-			<td><input type="image" class="imagenSeq" id="but2" onclick="agregar('estrella')" src="<%= @vista.imagenes[3] %>" /></td>
-			<td><input type="image" class="imagenSeq" id="but2" onclick="agregar('kleer')" src="<%= @vista.imagenes[4] %>" /></td>
+			<%i = 0%>
+			<% @vista.tipos.each do |name| %>
+				<td>
+				<input type="image" class="imagenSeq" id="<%= @vista.getNombreBoton(i) %>" onClick="<%= @vista.getFuncion(name) %>" src="<%= @vista.imagenes[i] %>" />
+				</td>
+				<% i += 1 %>
+			<% end %>
 		<tr>
 	</table>
 <br/>
