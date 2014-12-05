@@ -4,12 +4,12 @@ class SimonRecargado
 	end
 
 	def generarLista(num)
-		
+		puts "num:" + num
 		imagenesRetorno = ""
 		secuenciaRetorno = ""
 		$i = 0
 		while $i < num.to_i do
-			if(imagenesRetorno.length == 0)
+		puts "entro while"
 				imagen = @imagenes[rand(4)-1]
 				imagenesRetorno =  imagenesRetorno + "<img class='imagenSeq' src='" + getUrl(imagen) + "' />"
 				if(secuenciaRetorno.length == 0)
@@ -17,7 +17,6 @@ class SimonRecargado
 				else
 					secuenciaRetorno = secuenciaRetorno + "," + imagen
 				end
-			end
 			$i += 1	
 		end
 		imagenesRetorno + "&&" + secuenciaRetorno

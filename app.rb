@@ -12,7 +12,7 @@ end
 
 get '/jugar/?:num?' do
 	@@simon = SimonRecargado.new	
-	@secuencia = @@simon.generarLista(params[:num]).split("&&")[0]
+	@secuencia = @@simon.generarLista(params[:num])
 
 	erb :jugar
 end
