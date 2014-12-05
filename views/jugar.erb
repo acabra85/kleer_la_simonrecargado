@@ -12,7 +12,7 @@
 		setTimeout(function() {
     		$('#secuencia').fadeOut('slow');
     		$('#respuesta').fadeIn('slow');
-		}, 1000);
+		}, 3000);
 	});
 
 	function agregar(imagen) {
@@ -21,21 +21,23 @@
 		document.getElementById('secuenciaRespuesta').innerHTML	= innerHTML;
 		var campoRespuesta = document.getElementById('campoRespuesta');
 		if(campoRespuesta.value.length == 0)
-			campoRespuesta.value = '["' + imagen + '"]';
+			campoRespuesta.value = imagen;
 		else
-			campoRespuesta.value = campoRespuesta.value + ',' + '["' + imagen + '"]';;
+			campoRespuesta.value = campoRespuesta.value + ',' + imagen;
 		validar();
 	}
 
 	function validar() {
-		var divSeq = document.getElementById("campoRespuesta");
-		var divSeqRes = document.getElementById("campoOriginal");
-		/*if(divSeq === divSeqRes) {
-			location.href = "/gano"
-		}else {
-			location.href = "/perdio"
-		}*/
-	
+		var divSeq = document.getElementById("campoRespuesta").value;
+		var divSeqRes = document.getElementById("campoOriginal").value;
+		
+		if(divSeq.split(',').length === divSeqRes.split(',').length) {
+			if(divSeq === divSeqRes) {
+				document.getElementById('botonSiguiente').click();
+			}else {
+				location.href = "/perdio"
+			}
+		}	
 	}
 	
 	function getUrlImagen(imagen) {
@@ -69,7 +71,7 @@ table tr {
 </style>
 <div id="secuencia" style="display:block">
 	<h1>Simón Recargado dice:</h1>
-	<h2>Recuerda las imagenes, tienes 5 segundos......</h2>
+	<h2>Recuerda las imagenes, tienes 3 segundos......</h2>
 		<%= @secuencia.split("&&")[0] %>	
 </div>
 
@@ -101,8 +103,12 @@ table tr {
 
 
 
-<div style="display:block;">
-	<input type="text" id = "campoRespuesta" value="" />
-	<input type="text" id = "campoOriginal" value=<%= @secuencia.split("&&")[1].split(',') %> />
+<div style="display:none;">
+	<form method="get" action="/jugar" name="formSiguiente">
+		<input type="text" id = "campoRespuesta" value="" />
+		<input type="text" id = "campoOriginal" value=<%= @secuencia.split("&&")[1] %> />
+		<input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>
+		<input type="text" value=<%= @secuencia.split("&&")[1].split(',').length + 1 %> name="num">
+	</form>
 </div>
 
