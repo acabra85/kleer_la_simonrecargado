@@ -5,7 +5,7 @@
 
 		setTimeout(function() {
 	
-    		$('#secuencia').fadeOut('slow');
+    		$('#secuencia').fadeOut('fast');
     		$('#respuesta').fadeIn('slow');
 		}, 5000);
 	});
@@ -24,14 +24,33 @@
     height: 100px;
     width: 100px;
 	}
+
+	body {
+      background-image: url("http://i.huffpost.com/gen/799955/thumbs/o-THE-MATRIX-AND-HINDUISM-facebook.jpg");
+}
+
+div {
+	background-color:rgba(255,255,255,0.8);
+	height:500px;
+    width:500px; margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+	text-align: center;
+	
+}
+
+table tr {
+	width: 100%;
+}
 </style>
 <div id="secuencia" style="display:block">
-	<h2>Simón Recargado dice:<h2>
-	<img class="imagenSeq" src="http://png-4.findicons.com/files/icons/1018/pixelicious/32/star.png" />
+	<h1>Simón Recargado dice:</h1>
+	<h2>Recuerda las imagenes, tienes 5 segundos......</h2>
+	<img class="imagenSeq" src="http://img2.wikia.nocookie.net/__cb20130620210048/inciclopedia/images/1/18/Estrella_amarilla.png" />
 </div>
 
 <div id="respuesta" style="display:none">
-	<table>
+	<table border="1" align="center">
 		<tr colspan="2">
 			<h2>Selecciona las imagenes de tu respuesta . . .<h2>	
 			<input type="text" name="res" id="res" style="display:none">
@@ -44,8 +63,13 @@
 			<td><input type="image" class="imagenSeq"id="but4" onclick="validar('circulo')" src="http://www.arquba.com/curso-sketchup-gratis/entidades-de-circulo/index_ren-Circle.jpg" ></input></td>
 		<tr>
 	</table>
-</div>
+<br/>
+<br/>
+<br/>
 
 <form method="get" action="/">
-<input type="submit" name="Volver" value="volver" />
+<input type="submit" name="Reiniciar Juego" value="Reiniciar Juego" />
 </form>	
+</div>
+
+
