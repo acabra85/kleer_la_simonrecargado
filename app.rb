@@ -10,7 +10,10 @@ get '/' do
 	erb :home
 end
 
-get '/jugar' do
+get '/jugar/?:num?' do
+	@@simon = SimonRecargado.new	
+	@secuencia = @@simon.generarLista(params[:num])
+
 	erb :jugar
 end
 
@@ -23,6 +26,7 @@ get '/perdio' do
 end
 
 get '/images/?:num?' do
-	@@simon = SimonRecargado.new
-	@@simon.generarLista(params[:num])
+	#TODO validar si es necesario en cada metodo del app instanciar @@simon
+	
+	erb :jugar
 end

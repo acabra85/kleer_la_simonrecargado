@@ -1,10 +1,9 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">	
 	
-	$( document ).ready(function() {
-
-		setTimeout(function() {
 	
+	$( document ).ready(function() {
+		setTimeout(function() {
     		$('#secuencia').fadeOut('slow');
     		$('#respuesta').fadeIn('slow');
 		}, 5000);
@@ -17,6 +16,10 @@
 			location.href = "/perdio"			
 		}
 	}
+	
+	function getUrlImagen(imagen) {
+		return mapImages[imagen];
+	}
 
 </script>
 <style type="text/css">
@@ -27,7 +30,10 @@
 </style>
 <div id="secuencia" style="display:block">
 	<h2>Simón Recargado dice:<h2>
-	<img class="imagenSeq" src="http://png-4.findicons.com/files/icons/1018/pixelicious/32/star.png" />
+		<% @secuencia.split(",").each do |img| %>
+		  <%#{img}%>
+		<% end %>	
+	
 </div>
 
 <div id="respuesta" style="display:none">
