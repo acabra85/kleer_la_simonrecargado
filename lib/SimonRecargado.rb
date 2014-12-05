@@ -1,7 +1,7 @@
 class SimonRecargado
 
 
-	#attr_accessor :lista_generada
+	attr_accessor :lista_generada
 	
 	def initialize
 		@imagenes = ["estrella","triangulo","cuadrado", "circulo", "kleer"]
