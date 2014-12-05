@@ -1,6 +1,11 @@
 class SimonRecargado
+
+
+	attr_accessor :lista_generada
+	
 	def initialize
 		@imagenes = ["estrella","triangulo","cuadrado", "circulo", "kleer"]
+		@lista_generada = []
 	end
 
 	def generarLista(num)
@@ -16,6 +21,12 @@ class SimonRecargado
 			end
 			$i += 1	
 		end
+		@lista_generada = secuenciaRetorno
 		secuenciaRetorno
+		
+	end
+
+	def validarLista(listaRespuesta)
+		@lista_generada == listaRespuesta
 	end
 end

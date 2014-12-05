@@ -26,5 +26,15 @@ describe SimonRecargado do
 	it "Generar una lista vacia cuando no envie el parametro" do
 		@simon.generarLista("").split(",").length.should == 0 
 	end
+
+	it "El usuario entrega una lista correspondiente a la pedida debe retornar true" do
+		@simon.lista_generada = "cuadrado,circulo,triangulo"
+		@simon.validarLista("cuadrado,circulo,triangulo").should == true
+	end
+
+	it "El usuario entrega una lista correspondiente a la pedida debe retornar false" do
+		@simon.lista_generada = "cuadrado,circulo,kleer"
+		@simon.validarLista("cuadrado,circulo,triangulo").should == false
+	end
 end
 
