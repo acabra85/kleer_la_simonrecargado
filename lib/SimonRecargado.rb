@@ -5,7 +5,7 @@ class SimonRecargado
 	
 	def initialize
 		@imagenes = ["estrella","triangulo","cuadrado", "circulo", "kleer"]
-		@lista_generada = []
+		@lista_generada = ""
 	end
 
 	def generarLista(num)
@@ -27,6 +27,8 @@ class SimonRecargado
 	end
 
 	def validarLista(listaRespuesta)
+		puts @lista_generada
+		puts listaRespuesta
 		@lista_generada == listaRespuesta
 	end
 end

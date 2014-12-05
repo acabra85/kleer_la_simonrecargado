@@ -72,11 +72,7 @@
 		var divSeqRes = document.getElementById("campoOriginal").value;
 		
 		if(divSeq.split(',').length === divSeqRes.split(',').length) {
-			if(divSeq === divSeqRes) {
-				document.getElementById('botonSiguiente').click();
-			}else {
-				location.href = "/perdio"
-			}
+			document.getElementById('botonSiguiente').click();
 		}	
 	}
 	
@@ -150,11 +146,11 @@ table tr {
 
 
 <div style="display:none;">
-	<form method="get" action="/jugar" name="formSiguiente">
-		<input type="text" id = "campoRespuesta" value="" />
-		<input type="text" id = "campoOriginal" value=<%= @secuencia %> />
-		<input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>
+	<form method="get" action="/validar" name="formSiguiente">
+		<input type="text" id = "campoRespuesta" name = "campoRespuesta" value="" />
+		<input type="text" id = "campoOriginal" name = "campoOriginal" value=<%= @secuencia %> />
 		<input type="text" value=<%= @secuencia.split(',').length + 1 %> name="num" id="num">
+		<input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>
 	</form>
 </div>
 

@@ -17,16 +17,17 @@ get '/jugar/?:num?' do
 	erb :jugar
 end
 
-get '/gano' do
-	erb :gano
-end
-
 get '/perdio' do
 	erb :perdio
 end
 
-get '/images/?:num?' do
-	#TODO validar si es necesario en cada metodo del app instanciar @@simon
-	
-	erb :jugar
+get '/validar/?:num?/?:campoRespuesta?/?:campoOriginal?' do
+	@@simon.lista_generada = params[:campoOriginal]
+	res = @@simon.validarLista(params[:campoRespuesta])
+	if(res)
+		@secuencia = @@simon.generarLista(params[:num])
+		erb :jugar
+	else
+		erb :perdio
+	end
 end
