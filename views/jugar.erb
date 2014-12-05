@@ -12,7 +12,8 @@
 				"http://www.clker.com/cliparts/a/6/0/8/13450054841457633298glossy-blue-circle-button-md-hi.png",
 				"http://doc.qt.digia.com/4.6/images/used-in-examples/widgets/tooltips/images/square.png",
 				"http://www.semokwan.com/heraldica%20de%20hamgumdo/piramide.png",
-				"http://img2.wikia.nocookie.net/__cb20130620210048/inciclopedia/images/1/18/Estrella_amarilla.png"]
+				"http://img2.wikia.nocookie.net/__cb20130620210048/inciclopedia/images/1/18/Estrella_amarilla.png",
+				"https://members.scrumalliance.org/system/user/photo/0008/9921/200x200/BigBigK-FondoBlanco.jpg"]
 		end
 		
 
@@ -24,8 +25,10 @@
 				img = @imagenes[1]
 			elsif (llave == 'triangulo')
 				img = @imagenes[2]
-			else
+			elsif (llave == 'estrella')
 				img = @imagenes[3]
+			else
+				img = @imagenes[4]
 			end
 			"<img class='imagenSeq' src='" + img + "' />"
 		end
@@ -42,6 +45,7 @@
 		'cuadrado': '<%= @vista.imagenes[1] %>',
 		'estrella': '<%= @vista.imagenes[3] %>',
 		'triangulo': '<%= @vista.imagenes[2] %>',
+		'kleer': '<%= @vista.imagenes[4] %>'
 	};
 
 	$( document ).ready(function() {
@@ -128,6 +132,7 @@ table tr {
 			<td><input type="image" class="imagenSeq" id="but1" onclick="agregar('cuadrado')" src="<%= @vista.imagenes[1] %>" /></td>
 			<td><input type="image" class="imagenSeq" id="but3" onclick="agregar('triangulo')" src="<%= @vista.imagenes[2] %>" /></td>
 			<td><input type="image" class="imagenSeq" id="but2" onclick="agregar('estrella')" src="<%= @vista.imagenes[3] %>" /></td>
+			<td><input type="image" class="imagenSeq" id="but2" onclick="agregar('kleer')" src="<%= @vista.imagenes[4] %>" /></td>
 		<tr>
 	</table>
 <br/>
