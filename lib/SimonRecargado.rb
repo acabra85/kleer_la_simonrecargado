@@ -5,7 +5,7 @@ class SimonRecargado
 	attr_accessor :lista_respuesta
 	
 	def initialize
-		@imagenes = ["estrella","triangulo","cuadrado", "circulo", "kleer"]
+		@imagenes = ["estrella","triangulo","cuadrado", "circulo", "kleer", "estrella2"]
 		@lista_generada = ""
 		@lista_respuesta = ""
 	end

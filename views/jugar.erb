@@ -1,26 +1,24 @@
-<html>
-
 <%
 
 	class Vista 
-
 
 		attr_accessor :imagenes
 		attr_accessor :tipos
 
 		def initialize
 			@imagenes = [
-				"http://www.clker.com/cliparts/a/6/0/8/13450054841457633298glossy-blue-circle-button-md-hi.png",
-				"http://doc.qt.digia.com/4.6/images/used-in-examples/widgets/tooltips/images/square.png",
-				"http://www.semokwan.com/heraldica%20de%20hamgumdo/piramide.png",
-				"http://img2.wikia.nocookie.net/__cb20130620210048/inciclopedia/images/1/18/Estrella_amarilla.png",
-				"https://members.scrumalliance.org/system/user/photo/0008/9921/200x200/BigBigK-FondoBlanco.jpg"]
+				"./public?folder=img&name=0&ext=png", #circulo
+				"./public?folder=img&name=1&ext=png", #cuadrado
+				"./public?folder=img&name=2&ext=png", #triangulo
+				"./public?folder=img&name=3&ext=png", #estrella
+				"./public?folder=img&name=4&ext=png", #kleer
+				"./public?folder=img&name=5&ext=png"]
 
-			@tipos = ["circulo", "cuadrado", "triangulo", "estrella", "kleer"]
+			@tipos = ["circulo", "cuadrado", "triangulo", "estrella", "kleer", "estrella2"]
 		end
 		
 
-		def getImagen(llave)
+		def getImagen(llave, type)
 			img = ""
 			if(llave == 'circulo')
 				img = @imagenes[0]
@@ -30,10 +28,16 @@
 				img = @imagenes[2]
 			elsif (llave == 'estrella')
 				img = @imagenes[3]
-			else
+			elsif (llave == 'kleer')
 				img = @imagenes[4]
+			else
+				img = @imagenes[5]
 			end
-			"<img class='imagenSeq' src='" + img + "' />"
+      if(type == "ans")
+			 "<img class='imagenSeqAns' src='" + img + "' />"
+      else
+        "<img class='imagenSeq' src='" + img + "' />"
+      end
 		end
 
 		def getNombreBoton(num)
@@ -41,132 +45,93 @@
 		end
 		
 		def getFuncion(name)
-			res = "agregar('" + name + "')"
-			puts res
-			res
+			"agregar('" + name + "')"
 		end
+    
+    def getKeyboard()
+      keyboard = ""
+      i = 0
+      tipos.each do |tipo|
+        if(keyboard.length == 0)
+          keyboard = "<td><input type='image' class='imagenSeq' id=" + getNombreBoton(i) + 
+                                " onClick=" + getFuncion(tipo) + " src=" + imagenes[i] + " /></td>"
+        else
+          keyboard += "<td><input type='image' class='imagenSeq' id=" + getNombreBoton(i) + 
+                                " onClick=" + getFuncion(tipo) + " src=" + imagenes[i] + " /></td>"
+        end
+        i += 1
+      end
+      keyboard
+    end
+    
+    def getMemorySequence(seq, type)
+      memorySeq = ""
+      seq.split(',').each do |name|
+        if(type == "ans")
+          memorySeq += getImagen(name, "ans")
+        else
+          memorySeq += getImagen(name, "")
+        end
+      end
+      memorySeq
+    end
+    
 	end
 
 	@vista = Vista.new
+  @@mainView = @vista
 %>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="./public?folder=css&name=jugar&ext=css">
+  <script type="text/javascript" src="./public?folder=lib&name=jquery&ext=js"></script>
+  <script type="text/javascript"src="./public?folder=lib&name=app&ext=js" ></script>
+  <script>
+    var arreglo = {
+      'circulo': '<%= @vista.imagenes[0] %>',
+      'cuadrado': '<%= @vista.imagenes[1] %>',
+      'triangulo': '<%= @vista.imagenes[2] %>',
+      'estrella': '<%= @vista.imagenes[3] %>',
+      'kleer': '<%= @vista.imagenes[4] %>',
+      'estrella2': '<%= @vista.imagenes[5] %>'
+    };
+  </script>
+</head>
+<body>
+  <div id="secuencia" style="display:block">
+    <h1>Simón Recargado dice:</h1>
+    <h2>Recuerda las imagenes, tienes <%= @secuencia.split(',').length + 0.5 %> segundos......</h2>
+      <%= @vista.getMemorySequence(@secuencia, "") %>
+  </div>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript">	
-	
-	var arreglo = {
-		'circulo': '<%= @vista.imagenes[0] %>',
-		'cuadrado': '<%= @vista.imagenes[1] %>',
-		'triangulo': '<%= @vista.imagenes[2] %>',
-		'estrella': '<%= @vista.imagenes[3] %>',
-		'kleer': '<%= @vista.imagenes[4] %>'
-	};
-
-	$( document ).ready(function() {
-		setTimeout(function() {
-    		$('#secuencia').fadeOut('slow');
-    		$('#secuencia').html("");
-    		$('#respuesta').fadeIn('slow');
-		}, 1000*(parseInt(document.getElementById('num').value)+1));
-	});
-
-	function agregar(imagen) {
-		var innerHTML = document.getElementById('secuenciaRespuesta').innerHTML;
-		innerHTML = innerHTML + "<img class='imagenSeq' src='" + arreglo[imagen] + "' />";
-		document.getElementById('secuenciaRespuesta').innerHTML	= innerHTML;
-		var campoRespuesta = document.getElementById('campoRespuesta');
-		if(campoRespuesta.value.length == 0)
-			campoRespuesta.value = imagen;
-		else
-			campoRespuesta.value = campoRespuesta.value + ',' + imagen;
-		validar();
-	}
-
-	function validar() {
-		var divSeq = document.getElementById("campoRespuesta").value;
-		
-		if(divSeq.split(',').length === document.getElementById('num').value - 1) {
-			document.getElementById('botonSiguiente').click();
-		}	
-	}
-	
-	function getUrlImagen(imagen) {
-		return mapImages[imagen];
-	}
-
-</script>
-<style type="text/css">
-	.imagenSeq {
-    height: 100px;
-    width: 100px;
-	}
-
-	body {
-      background-image: url("http://i.huffpost.com/gen/799955/thumbs/o-THE-MATRIX-AND-HINDUISM-facebook.jpg");
-}
-
-div {
-	background-color:rgba(255,255,255,0.8);
-	height:500px;
-    width:500px; margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-	text-align: center;
-	
-}
-
-table tr {
-	width: 100%;
-}
-</style>
-<div id="secuencia" style="display:block">
-	<h1>Simón Recargado dice:</h1>
-	<h2>Recuerda las imagenes, tienes <%= @secuencia.split(',').length + 2 %> segundos......</h2>
-
-		<% @secuencia.split(',').each do |name| %>
-		  <%= @vista.getImagen(name) %>
-		<% end %>
-
-</div>
+  <div id="respuesta" style="display:none">
+    <table class="tabla" align="center">
+      <tr colspan="2">
+        <h2>Selecciona las imagenes de tu respuesta . . .<h2>	
+        <input type="text" name="res" id="res" style="display:none">
+      </tr>
+      <tr>
+        <%= @vista.getKeyboard() %>
+      <tr>
+    </table>
+  <br/>
+  <br/>
+  <div id="secuenciaRespuesta" style="display:block; height: 20%; background-color:rgba(25,25,25,0.3)">
+  </div>
+  <br/>
 
 
+  <form method="get" action="/">
+  <input type="submit" name="Reiniciar Juego" value="Reiniciar Juego" />
+  </form>	
+  </div>
 
-<div id="respuesta" style="display:none">
-	<table border="1" align="center">
-		<tr colspan="2">
-			<h2>Selecciona las imagenes de tu respuesta . . .<h2>	
-			<input type="text" name="res" id="res" style="display:none">
-		</tr>
-		<tr>
-			<%i = 0%>
-			<% @vista.tipos.each do |name| %>
-				<td>
-				<input type="image" class="imagenSeq" id="<%= @vista.getNombreBoton(i) %>" onClick="<%= @vista.getFuncion(name) %>" src="<%= @vista.imagenes[i] %>" />
-				</td>
-				<% i += 1 %>
-			<% end %>
-		<tr>
-	</table>
-<br/>
-<br/>
-<div id="secuenciaRespuesta" style="display:block; height: 20%; background-color:rgba(25,25,25,0.3)">
-</div>
-<br/>
-
-
-<form method="get" action="/">
-<input type="submit" name="Reiniciar Juego" value="Reiniciar Juego" />
-</form>	
-</div>
-
-
-
-<div style="display:none;">
-	<form method="get" action="/validar" name="formSiguiente">
-		<input type="text" id = "campoRespuesta" name = "campoRespuesta" value="" />
-		<input type="text" value=<%= @secuencia.split(',').length + 1 %> name="num" id="num">
-		<input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>
-	</form>
-</div>
-
-
+  <div style="display:none;">
+    <form method="get" action="/validar" name="formSiguiente">
+      <input type="text" id = "campoRespuesta" name = "campoRespuesta" value="" />
+      <input type="text" value=<%= @secuencia.split(',').length + 1 %> name="num" id="num">
+      <input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>
+    </form>
+  </div>
+</body>
 </html>
