@@ -20,19 +20,15 @@
 
 		def getImagen(llave, type)
 			img = ""
-			if(llave == 'img_00')
-				img = @imagenes[0]
-			elsif (llave == 'img_01')
-				img = @imagenes[1]
-			elsif (llave == 'img_02')
-				img = @imagenes[2]
-			elsif (llave == 'img_03')
-				img = @imagenes[3]
-			elsif (llave == 'img_04')
-				img = @imagenes[4]
-			else
-				img = @imagenes[5]
-			end
+      i = 0
+      encontrado = false
+      while i < tipos.length && !encontrado do
+        if(tipos[i] == llave)
+          img = @imagenes[i]
+          encontrado = true
+        end
+        i += 1
+      end			
       if(type == "ans")
 			 "<img class='imagenSeqAns' src='" + img + "' />"
       else
@@ -76,6 +72,11 @@
       memorySeq
     end
     
+    def getStyleSecuenciaGenerada(num)
+      size = (num%11)*81
+      "display:block; width:95%; height: " + (size+10).to_s + "px; "
+    end
+    
 	end
 
 	@vista = Vista.new
@@ -99,33 +100,32 @@
   </script>
 </head>
 <body>
-  <div id="secuencia" style="display:block">
+  <div id="secuencia" style="display:block; height:80%; width: 80%; overflow-y:auto; ">
     <h1>Simón Recargado dice:</h1>
     <h2><span class="player_name"><%= @nombre_jugador%></span> Recuerda las imagenes, tienes <%= @secuencia.split(',').length + 0.5 %> segundos......</h2>
+    <div id="secuenciaGenerada" align="center" style=<%= @vista.getStyleSecuenciaGenerada(@secuencia.length) %> >
       <%= @vista.getMemorySequence(@secuencia, "") %>
+    </div>        
   </div>
-
-  <div id="respuesta" style="display:none">
-    <table class="tabla" align="center">
-      <tr colspan="2">
-        <h2><span class="player_name"><%= @nombre_jugador%></span> Selecciona las imagenes de tu respuesta . . .<h2>	
-        <input type="text" name="res" id="res" style="display:none">
-      </tr>
-      <tr>
-        <%= @vista.getKeyboard() %>
-      <tr>
-    </table>
-  <br/>
-  <br/>
-  <div id="secuenciaRespuesta" style="display:block; height: 20%; background-color:rgba(25,25,25,0.3)">
-  </div>
-  <br/>
+  <div id="respuesta" style="display:none; width:80%; overflow-y: scroll;">
+      <table class="tabla" align="center">
+        <tr colspan="2">
+          <h2><span class="player_name"><%= @nombre_jugador%></span> Selecciona las imagenes de tu respuesta . . .<h2>	
+          <input type="text" name="res" id="res" style="display:none">
+        </tr>
+        <tr><td><%= @vista.getKeyboard() %></td><tr>
+      </table>
+      <br/>
+      <br/>
+      <div id="secuenciaRespuesta" style="display:block; height: 100px; width: 90%; background-color:rgba(25,25,25,0.3); overflow-y: auto;">
+      </div>
+      <br/>
 
 
-  <form method="get" action="/">
-  <input type="submit" name="Reiniciar Juego" value="Reiniciar Juego" />
-  </form>	
-  </div>
+      <form method="get" action="/">
+        <input type="submit" name="Reiniciar Juego" value="Reiniciar Juego" />
+      </form>	
+    </div>
 
   <div style="display:none;">
     <form method="get" action="/validar" name="formSiguiente">

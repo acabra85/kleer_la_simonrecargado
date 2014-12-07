@@ -8,7 +8,7 @@ $( document ).ready(function() {
 
 function agregar(imagen) {
   var innerHTML = document.getElementById('secuenciaRespuesta').innerHTML;
-  innerHTML = innerHTML + "<input type=\"image\" style=\"width:100px ;height:100px;\" src=\"" + arreglo[imagen] + "\" " + 
+  innerHTML = innerHTML + "<input type=\"image\" style=\"width:45px ;height:45px;\" src=\"" + arreglo[imagen] + "\" " + 
                                   "class=\"but_" + imagen + "\" " +
                                   "onClick=\"remover('"+ imagen +"', 'but_"+ imagen +"')\" />";
   document.getElementById('secuenciaRespuesta').innerHTML	= innerHTML;
