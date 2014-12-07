@@ -3,16 +3,20 @@ class SimonRecargado
 
 	attr_accessor :lista_generada
 	attr_accessor :lista_respuesta
+	attr_accessor :player_name
 	
 	def initialize
-		@imagenes = ["estrella","triangulo","cuadrado", "circulo", "kleer", "estrella2"]
+		@imagenes = ["img_00","img_01","img_02", "img_03", "img_04", "img_05"]
 		@lista_generada = ""
 		@lista_respuesta = ""
+		@player_name = ""
 	end
 
 	def generarLista(num)
-		secuenciaRetorno = ""
-		$i = 0
+		secuenciaRetorno = @lista_generada    
+    $cant = @lista_generada.split(',').length
+    puts $cant
+		$i = $cant
 		while $i < num.to_i do
 			imagen = @imagenes[rand(@imagenes.length)-1]
 		
@@ -32,4 +36,12 @@ class SimonRecargado
 		@lista_respuesta = listaRespuesta
 		@lista_generada == @lista_respuesta
 	end
+  
+  def getPlayerName()
+    @player_name
+  end
+  
+  def setPlayerName(playerName)
+    @player_name = playerName
+  end
 end

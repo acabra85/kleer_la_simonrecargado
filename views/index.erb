@@ -1,34 +1,24 @@
 <html>
-  <head>  
-    <style type="text/css">
-      body {
-        background-image: url("./public?folder=img&name=fondo_matrix&ext=jpg");
-      }
-
-      div {
-          background-color:rgba(255,255,255,0.8);
-          height:500px;
-          width:500px; margin-left: auto;
-          margin-right: auto;
-          width: 70%;
-          text-align: center;
-          font-family: "Lucida Console", Monaco, monospace;
-
-      }
-      h1 {
-        font-size: 60px;
-      }
-      input {
-        font-size: 16px;
-        padding: 15px 15px 15px 15px;
-      }
-    </style>
+  <head>      
+    <link rel="stylesheet" type="text/css" href="./public?folder=css&name=main&ext=css">
+    <link rel="shortcut icon" href="./public?folder=img&name=favicon&ext=ico" type="image/vnd.microsoft.icon">
   </head>
   <body>
     <div style="back">
       <h1>Bienvenido!<br/> Soy Simón Recargado!!</h1>
       <form method="get" action="/jugar">
-       <input type="submit" value="Jugar" name="jugar" />
+        <table align="center">
+          <tr>
+            <td>Digita tu nombre: </td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" name="playerName" value="" />
+            </td>
+            <td>
+              <input type="submit" value="Jugar" name="jugar" /></td>
+          </tr>
+        </table>
 	     <input type="text" value="1" name="num" style="display:none">
       </form>
     </div>    

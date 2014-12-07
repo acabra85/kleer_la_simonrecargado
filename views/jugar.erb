@@ -14,21 +14,21 @@
 				"./public?folder=img&name=4&ext=png", #kleer
 				"./public?folder=img&name=5&ext=png"]
 
-			@tipos = ["circulo", "cuadrado", "triangulo", "estrella", "kleer", "estrella2"]
+			@tipos = ["img_00", "img_01", "img_02", "img_03", "img_04", "img_05"]
 		end
 		
 
 		def getImagen(llave, type)
 			img = ""
-			if(llave == 'circulo')
+			if(llave == 'img_00')
 				img = @imagenes[0]
-			elsif (llave == 'cuadrado')
+			elsif (llave == 'img_01')
 				img = @imagenes[1]
-			elsif (llave == 'triangulo')
+			elsif (llave == 'img_02')
 				img = @imagenes[2]
-			elsif (llave == 'estrella')
+			elsif (llave == 'img_03')
 				img = @imagenes[3]
-			elsif (llave == 'kleer')
+			elsif (llave == 'img_04')
 				img = @imagenes[4]
 			else
 				img = @imagenes[5]
@@ -83,31 +83,32 @@
 %>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="./public?folder=css&name=jugar&ext=css">
+  <link rel="stylesheet" type="text/css" href="./public?folder=css&name=jugar&ext=css">  
+  <link rel="shortcut icon" href="./public?folder=img&name=favicon&ext=ico" type="image/vnd.microsoft.icon">
   <script type="text/javascript" src="./public?folder=lib&name=jquery&ext=js"></script>
   <script type="text/javascript"src="./public?folder=lib&name=app&ext=js" ></script>
   <script>
     var arreglo = {
-      'circulo': '<%= @vista.imagenes[0] %>',
-      'cuadrado': '<%= @vista.imagenes[1] %>',
-      'triangulo': '<%= @vista.imagenes[2] %>',
-      'estrella': '<%= @vista.imagenes[3] %>',
-      'kleer': '<%= @vista.imagenes[4] %>',
-      'estrella2': '<%= @vista.imagenes[5] %>'
+      'img_00': '<%= @vista.imagenes[0] %>',
+      'img_01': '<%= @vista.imagenes[1] %>',
+      'img_02': '<%= @vista.imagenes[2] %>',
+      'img_03': '<%= @vista.imagenes[3] %>',
+      'img_04': '<%= @vista.imagenes[4] %>',
+      'img_05': '<%= @vista.imagenes[5] %>'
     };
   </script>
 </head>
 <body>
   <div id="secuencia" style="display:block">
     <h1>Simón Recargado dice:</h1>
-    <h2>Recuerda las imagenes, tienes <%= @secuencia.split(',').length + 0.5 %> segundos......</h2>
+    <h2><span class="player_name"><%= @nombre_jugador%></span> Recuerda las imagenes, tienes <%= @secuencia.split(',').length + 0.5 %> segundos......</h2>
       <%= @vista.getMemorySequence(@secuencia, "") %>
   </div>
 
   <div id="respuesta" style="display:none">
     <table class="tabla" align="center">
       <tr colspan="2">
-        <h2>Selecciona las imagenes de tu respuesta . . .<h2>	
+        <h2><span class="player_name"><%= @nombre_jugador%></span> Selecciona las imagenes de tu respuesta . . .<h2>	
         <input type="text" name="res" id="res" style="display:none">
       </tr>
       <tr>
@@ -129,7 +130,8 @@
   <div style="display:none;">
     <form method="get" action="/validar" name="formSiguiente">
       <input type="text" id = "campoRespuesta" name = "campoRespuesta" value="" />
-      <input type="text" value=<%= @secuencia.split(',').length + 1 %> name="num" id="num">
+      <input type="text" id = "playerName" name = "playerName" value=<%= @nombre_jugador %> />
+      <input type="text" value=<%= @secuencia.split(',').length + 1 %> name="num" id="num" />
       <input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>
     </form>
   </div>

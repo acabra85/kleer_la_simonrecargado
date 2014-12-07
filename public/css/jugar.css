@@ -29,3 +29,10 @@ table tr {
   align: "center";
   widht: 70%;
 }
+
+.player_name {
+  font-style: italic;
+  font-family: fantasy;
+  font-size: 30px;
+  color: red;
+}
