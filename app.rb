@@ -11,7 +11,12 @@ get '/' do
 	erb :index
 end
 
-get '/jugar/?:num?' do
+post '/' do
+	@@simon = SimonRecargado.new
+	erb :index
+end
+
+post '/jugar/?:num?' do
 	@@simon = SimonRecargado.new	
 	@secuencia = @@simon.generarLista(params[:num])
 	@nombre_jugador = params[:playerName]
@@ -21,11 +26,7 @@ get '/jugar/?:num?' do
 	erb :jugar
 end
 
-get '/perdio' do
-	erb :perdio
-end
-
-get '/validar/?:num?/?:campoRespuesta?' do
+post '/validar/?:num?/?:campoRespuesta?' do
 	#@@simon.lista_generada = params[:campoOriginal]
 	res = @@simon.validarLista(params[:campoRespuesta])
 	@nombre_jugador = params[:playerName]

@@ -28,7 +28,8 @@
           encontrado = true
         end
         i += 1
-      end			
+      end
+      i = 0
       if(type == "ans")
 			 "<img class='imagenSeqAns' src='" + img + "' />"
       else
@@ -77,6 +78,23 @@
       "display:block; width:95%; height: " + (size+10).to_s + "px; "
     end
     
+    def getCountersArray()      
+      counters = ""
+      i = 0
+      tipos.each do |tipo|
+        if(i == 0)
+          counters = "{ '" + tipo + "' : 0 " 
+        else
+          counters = counters + ", '" + tipo + "' : 0 "
+        end
+        i += 1
+      end
+      i = 0
+      counters = counters + " }\""
+      res = ("\"" + counters).to_s
+      res
+    end
+    
 	end
 
 	@vista = Vista.new
@@ -102,10 +120,10 @@
 <body>
   <div id="secuencia" style="display:block; height:80%; width: 80%; overflow-y:auto; ">
     <h1>Simón Recargado dice:</h1>
-    <h2><span class="player_name"><%= @nombre_jugador%></span> Recuerda las imagenes, tienes <%= @secuencia.split(',').length + 0.5 %> segundos......</h2>
+    <h2><span class="player_name"><%= @nombre_jugador%></span> Recuerda las imagenes, tienes <%= @secuencia.split(',').length + 0.5 %> segundos... <a href="javascript:skipTime()">Contestar Ahora!</a></h2>
     <div id="secuenciaGenerada" align="center" style=<%= @vista.getStyleSecuenciaGenerada(@secuencia.length) %> >
       <%= @vista.getMemorySequence(@secuencia, "") %>
-    </div>        
+    </div>      
   </div>
   <div id="respuesta" style="display:none; width:80%; overflow-y: scroll;">
       <table class="tabla" align="center">
@@ -122,14 +140,15 @@
       <br/>
 
 
-      <form method="get" action="/">
+      <form method="post" action="/">
         <input type="submit" name="Reiniciar Juego" value="Reiniciar Juego" />
       </form>	
     </div>
 
   <div style="display:none;">
-    <form method="get" action="/validar" name="formSiguiente">
+    <form method="post" action="/validar" name="formSiguiente">
       <input type="text" id = "campoRespuesta" name = "campoRespuesta" value="" />
+      <input type="text" id = "contadores" name = "contadores" value=<%= @@mainView.getCountersArray() %> />
       <input type="text" id = "playerName" name = "playerName" value=<%= @nombre_jugador %> />
       <input type="text" value=<%= @secuencia.split(',').length + 1 %> name="num" id="num" />
       <input type="submit" value="Jugar" name="jugar" id="botonSiguiente"/>

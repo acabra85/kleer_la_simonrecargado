@@ -1,35 +1,31 @@
-$( document ).ready(function() {
-  setTimeout(function() {
-      $('#secuencia').fadeOut('slow');
+var time;
+$(document ).ready(function() {
+  time = setTimeout(function() {
+      $('#secuencia').fadeOut('fast');
       $('#secuencia').html("");
-      $('#respuesta').fadeIn('slow');
+      $('#respuesta').fadeIn('fast');
   }, 1000*(parseInt(document.getElementById('num').value)));
 });
 
 function agregar(imagen) {
   var innerHTML = document.getElementById('secuenciaRespuesta').innerHTML;
-  innerHTML = innerHTML + "<input type=\"image\" style=\"width:45px ;height:45px;\" src=\"" + arreglo[imagen] + "\" " + 
-                                  "class=\"but_" + imagen + "\" " +
-                                  "onClick=\"remover('"+ imagen +"', 'but_"+ imagen +"')\" />";
+  var numImagen = getContadorImagen(imagen);
+  var id = "but_" + imagen + "_" + numImagen;
+  innerHTML = innerHTML + "<input type=\"image\"  src=\"" + arreglo[imagen] + "\" " + 
+                                  "class=\"imagenSeqAns\" " +
+                                  "id=\"" + id + "\" " +
+                                  "onClick=\"remover('"+ imagen + '_' + numImagen +"', '"+ id +"')\" />";
   document.getElementById('secuenciaRespuesta').innerHTML	= innerHTML;
   var campoRespuesta = document.getElementById('campoRespuesta');
   if(campoRespuesta.value.length == 0)
-    campoRespuesta.value = imagen;
+    campoRespuesta.value = imagen + '_' + numImagen;
   else
-    campoRespuesta.value = campoRespuesta.value + ',' + imagen;
+    campoRespuesta.value = campoRespuesta.value + ',' + imagen + '_' + numImagen;
   validar();
 }
 
 function remover(imagen, type) {
-  var children = $('#secuenciaRespuesta').children();
-  var found = false;
-  for (var i=0;!found && i<children.length; i++) {
-    var child = children[i];
-    if(type == child.attributes.class.value) {
-      found = true;
-      child.remove();
-    }
-  }
+  $('#' + type).remove();
   var campoRespuesta = document.getElementById('campoRespuesta').value;
   
   var indexOf = campoRespuesta.indexOf(imagen);
@@ -43,13 +39,35 @@ function remover(imagen, type) {
 }
 
 function validar() {
-  var divSeq = document.getElementById("campoRespuesta").value;
-
-  if(divSeq.split(',').length === document.getElementById('num').value - 1) {
+  var divSeq = document.getElementById("campoRespuesta");
+  var arrRes = divSeq.value.split(',');
+  if(arrRes.length === document.getElementById('num').value - 1) {
+    var tot = ""
+    for(var i = 0; i< arrRes.length; i++) {
+      if(i==0) {
+        tot = arrRes[i].substr(0,6);
+      }else {
+        tot = tot + ',' + arrRes[i].substr(0,6);
+      }
+    }
+    divSeq.value = tot;
     document.getElementById('botonSiguiente').click();
   }	
 }
 
-function getUrlImagen(imagen) {
-  return mapImages[imagen];
+function getContadorImagen(imagen) {
+  var campoJson = document.getElementById("contadores");
+  var jsonText = campoJson.value.replace(/'/g, "\"");
+  var obj = JSON.parse(jsonText);
+  var num = parseInt(eval("obj." + imagen));
+  eval("obj." + imagen + " = " + (num+1) );
+  campoJson.value = JSON.stringify(obj).replace(/\"/g, "'");
+  return num;
+}
+
+function skipTime() {
+  clearTimeout(time);
+  $('#secuencia').fadeOut('fast');
+  $('#secuencia').html("");
+  $('#respuesta').fadeIn('fast');
 }

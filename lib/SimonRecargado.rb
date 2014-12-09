@@ -15,7 +15,6 @@ class SimonRecargado
 	def generarLista(num)
 		secuenciaRetorno = @lista_generada    
     $cant = @lista_generada.split(',').length
-    puts $cant
 		$i = $cant
 		while $i < num.to_i do
 			imagen = @imagenes[rand(@imagenes.length)-1]
