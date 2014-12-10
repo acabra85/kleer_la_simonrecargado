@@ -5,7 +5,8 @@
 </head>
 <body>
   <div style="height:95%; width:95%">
-    <h1><span class="player_name"><%= @nombre_jugador%></span> Lo siento, perdiste... Intenta otra vez!!</h1>
+    <h1></span> Lo siento, perdiste... Intenta otra vez!!</h1>
+  <h2><span class="player_name"><%= @nombre_jugador.capitalize %></span> lograste recordar: <span class="resultado"><%= @lista_generada.split(',').length-1 %></span> elementos!!!</h2>
     <img style="height:50%;"src="./public?folder=img&name=perdio&ext=png" />
     <br>      
     <table align="center" style="width:95%;">

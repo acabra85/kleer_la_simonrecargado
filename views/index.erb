@@ -2,6 +2,7 @@
   <head>      
     <link rel="stylesheet" type="text/css" href="./public?folder=css&name=main&ext=css">
     <link rel="shortcut icon" href="./public?folder=img&name=favicon&ext=ico" type="image/vnd.microsoft.icon">
+    <script type="text/javascript"src="./public?folder=lib&name=app&ext=js" ></script>
   </head>
   <body>
     <div style="back">
@@ -13,7 +14,7 @@
           </tr>
           <tr>
             <td>
-              <input type="text" name="playerName" value="" />
+              <input type="text" name="playerName" id="playerName" value="" onKeyPress="validarLetras()" onBlur="validarLetras()" />
             </td>
             <td>
               <input type="submit" value="Jugar" name="jugar" /></td>

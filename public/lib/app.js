@@ -71,3 +71,8 @@ function skipTime() {
   $('#secuencia').html("");
   $('#respuesta').fadeIn('fast');
 }
+
+function validarLetras() {
+  var field = document.getElementById('playerName');
+  field.value = field.value.replace(/[^A-Za-z]/g, "");
+}

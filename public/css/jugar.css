@@ -35,3 +35,10 @@ table tr {
   font-size: 30px;
   color: red;
 }
+
+.resultado {  
+  font-style: oblique;
+  font-family: monospace;
+  font-size: 35px;
+  color: olive;
+}
