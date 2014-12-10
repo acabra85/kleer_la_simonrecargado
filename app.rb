@@ -20,8 +20,10 @@ post '/jugar/?:num?' do
 	@@simon = SimonRecargado.new	
 	@secuencia = @@simon.generarLista(params[:num])
 	@nombre_jugador = params[:playerName]
-  if(@@simon.getPlayerName.length == 0)
+  if(@nombre_jugador.length > 0)
     @@simon.setPlayerName(@nombre_jugador)
+  else
+    @nombre_jugador = @@simon.getPlayerName()
   end
 	erb :jugar
 end

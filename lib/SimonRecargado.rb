@@ -9,7 +9,7 @@ class SimonRecargado
 		@imagenes = ["img_00","img_01","img_02", "img_03", "img_04", "img_05", "img_06", "img_07", "img_08"]
 		@lista_generada = ""
 		@lista_respuesta = ""
-		@player_name = ""
+		@player_name = "Jugador"
 	end
 
 	def generarLista(num)
